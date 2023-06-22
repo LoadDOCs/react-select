@@ -310,6 +310,17 @@ export class MenuPlacer extends Component<MenuPlacerProps, MenuState> {
 
     return { ...this.props, placement, maxHeight: this.state.maxHeight };
   };
+
+  UNSAFE_componentWillReceiveProps(nextProps: MenuProps) {
+    if (!nextProps || !this.props) {
+      return
+    }
+
+    if (nextProps.options !== this.props.options) {
+      this.getPlacement()
+    }
+  }
+
   render() {
     const { children } = this.props;
 
